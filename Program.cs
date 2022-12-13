@@ -5,19 +5,26 @@ class deal : numbers
     {
         numbers numb = new numbers();
         rackets rackets = new rackets();
+        scoreboard points = new scoreboard();
+        ball ball = new ball();
         const char fieldFile = '#';
         const char racketTile = '|';
         const char ballTile = 'O';
-        const int racketLength = 10 / 4;
-        int ballx = numb.GetfieldLenght() / 2;
-        int bally = numb.GetfieldWidth() / 2;
+        
+        int leftplayerPoints = points.GetleftPlayerPoints();
+        int rightplayerPoints = points.GetrightPlayerPoints();
+        int ballx = ball.getballx();
+        int bally = ball.getbally();
+        //int ballx = numb.GetfieldLenght() / 2;
+        //int bally = numb.GetfieldWidth() / 2;
         bool isBallGoingDown = true;
         bool isBallGoingRight = true;
         int scoreboardx = numb.GetfieldLenght() / 2 - 2;
         int scoreboardy =  numb.GetfieldWidth() + 3;
+        int racketLength = numb.GetfieldWidth() / 4;
         ///
-        const int fieldWidth2 = 10;
-        const int racketLength2 = fieldWidth2 / 4;
+        //const int fieldWidth2 = 10;
+        //const int racketLength2 = fieldWidth2 / 4;
         
         ///
 
@@ -27,16 +34,20 @@ class deal : numbers
 
            while (true)
             {
+                
+                int fieldWidth = numb.GetfieldWidth();
+                int fieldLength = numb.GetfieldLenght();
                 int leftRacketHeight = rackets.GetleftRacketHeight();
                 int rightRacketHeight = rackets.GetrightRacketHeight();
-                int leftplayerPoints = rackets.GetleftPlayerPoints();
-                int rightplayerPoints = rackets.GetrightPlayerPoints();
+                
+                int racketLength2 = fieldWidth / 4;
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine(line);
 
                 Console.SetCursorPosition(0, numb.GetfieldWidth());
                 Console.WriteLine(line);
-                for (int i = 0; i < racketLength; i++)
+                for (int i = 0; i < racketLength2; i++)
+                //
                 {
                     Console.SetCursorPosition(0, i + 1 + rackets.GetleftRacketHeight());
                     Console.WriteLine(racketTile);
@@ -73,18 +84,20 @@ class deal : numbers
                     }
                     if(ballx == 1)
                     {
-                        if(bally >= rackets.GetleftRacketHeight() + 1 && bally <= rackets.GetleftRacketHeight() + racketLength)
+                        if(bally >= rackets.GetleftRacketHeight() + 1 && bally <= rackets.GetleftRacketHeight() + racketLength2)
                         {
                             isBallGoingRight = !isBallGoingRight;
                         }
                         else
                         {
                             rightplayerPoints++;
-                            bally = numb.GetfieldWidth() / 2;
-                            ballx = numb.GetfieldLenght() / 2;
+                           // bally = numb.GetfieldWidth() / 2;
+                            //ballx = numb.GetfieldLenght() / 2;
+                            bally = fieldWidth / 2;
+                            ballx = fieldLength / 2;
                             Console.SetCursorPosition(scoreboardx, scoreboardy);
                             Console.WriteLine($"{leftplayerPoints} | {rightplayerPoints}");
-                             if(rackets.GetleftPlayerPoints() == 10)
+                             if(points.GetleftPlayerPoints() == 10)
                             {
                                 goto outer;
 
@@ -94,7 +107,7 @@ class deal : numbers
                     }
                     if(ballx == numb.GetfieldLenght() - 2)
                     {
-                        if(bally >= rightRacketHeight + 1 && bally <= rightRacketHeight + racketLength)
+                        if(bally >= rightRacketHeight + 1 && bally <= rightRacketHeight + racketLength2)
                         {
                             isBallGoingRight = !isBallGoingRight;
                         }
@@ -102,11 +115,13 @@ class deal : numbers
                         {
                             
                             leftplayerPoints++;
-                            bally = numb.GetfieldWidth() / 2;
-                            ballx = numb.GetfieldLenght() / 2;
+                           // bally = numb / 2;
+                           // ballx = numb.GetfieldLenght() / 2;
+                            bally = fieldWidth / 2;
+                            ballx = fieldLength / 2;
                             Console.SetCursorPosition(scoreboardx, scoreboardy);
                             Console.WriteLine($"{leftplayerPoints} | {rightplayerPoints}");
-                            if(rackets.GetrightPlayerPoints() == 10)
+                            if(points.GetrightPlayerPoints() == 10)
                             {
                                 goto outer;
 
@@ -126,7 +141,7 @@ class deal : numbers
                     }
                     break;
                   case ConsoleKey.DownArrow:
-                    if(rightRacketHeight < fieldWidth2 - racketLength2 - 1)
+                    if(rightRacketHeight < fieldWidth - racketLength2 - 1)
                     {
                       rightRacketHeight++;
                     }
@@ -138,7 +153,7 @@ class deal : numbers
                     }
                     break;
                   case ConsoleKey.S:
-                    if(leftRacketHeight < fieldWidth2 - racketLength2 - 1)
+                    if(leftRacketHeight < fieldWidth - racketLength2 - 1)
                     {
                       leftRacketHeight++;
                     }
@@ -159,7 +174,7 @@ class deal : numbers
             outer:;
             Console.Clear();
             Console.SetCursorPosition(0, 0);
-            if(rackets.GetrightPlayerPoints() == 10)
+            if(points.GetrightPlayerPoints() == 10)
             {
                 Console.WriteLine("Right player won!");
             }

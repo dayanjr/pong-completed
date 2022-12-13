@@ -1,5 +1,13 @@
-class scoreboard
+class scoreboard:numbers
 {
-     //int scoreboardx = fieldLenght / 2 - 2;
-            //int scoreboardy = fieldWidth + 3;
+      private static int leftPlayerPoints = 0;
+     private static int rightPlayerPoints = 0;
+     public int GetleftPlayerPoints()
+     {
+        return leftPlayerPoints;
+     }
+     public int GetrightPlayerPoints()
+     {
+        return rightPlayerPoints;
+     }
 }
