@@ -10,8 +10,21 @@ class rackets : numbers
      private static int rightRacketHeight = 0;
      private static int leftPlayerPoints = 0;
      private static int rightPlayerPoints = 0;
+     public int getracket()
+     {
+      GetfieldWidth();
+     var l = GetfieldWidth() / 2;
+      return l;
+     }
 
-    
+    public void setleftracketheight(int newheight)
+    {
+      leftRacketHeight = newheight;
+    }
+    public void setrightracketheight(int newheight)
+    {
+      rightRacketHeight = newheight;
+    }
      public int GetleftRacketHeight()
      {
         return leftRacketHeight;

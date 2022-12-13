@@ -18,19 +18,19 @@ class deal : numbers
         ///
         const int fieldWidth2 = 10;
         const int racketLength2 = fieldWidth2 / 4;
-        int leftRacketHeight2 = 0;
-        int rightRacketHeight2 = 0;
+        
         ///
 
         string line = string.Concat(Enumerable.Repeat(fieldFile, numb.GetfieldLenght()));
-         int leftRacketHeight = rackets.GetleftRacketHeight();
-         int rightRacketHeight = rackets.GetrightRacketHeight();
-         int leftplayerPoints = rackets.GetleftPlayerPoints();
-         int rightplayerPoints = rackets.GetrightPlayerPoints();
+         
         Console.Clear();
 
            while (true)
             {
+                int leftRacketHeight = rackets.GetleftRacketHeight();
+                int rightRacketHeight = rackets.GetrightRacketHeight();
+                int leftplayerPoints = rackets.GetleftPlayerPoints();
+                int rightplayerPoints = rackets.GetrightPlayerPoints();
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine(line);
 
@@ -120,30 +120,33 @@ class deal : numbers
                 switch (Console.ReadKey().Key)
                {
                   case ConsoleKey.UpArrow:
-                    if(rightRacketHeight2 > 0)
+                    if(rightRacketHeight > 0)
                     {
-                      rightRacketHeight2--;
+                      rightRacketHeight--;
                     }
                     break;
                   case ConsoleKey.DownArrow:
-                    if(rightRacketHeight2 < fieldWidth2 - racketLength2 - 1)
+                    if(rightRacketHeight < fieldWidth2 - racketLength2 - 1)
                     {
-                      rightRacketHeight2++;
+                      rightRacketHeight++;
                     }
                     break;
                   case ConsoleKey.W:
-                    if(leftRacketHeight2 > 0)
+                    if(leftRacketHeight > 0)
                     {
-                      leftRacketHeight2--;
+                      leftRacketHeight--;
                     }
                     break;
                   case ConsoleKey.S:
-                    if(leftRacketHeight2 < fieldWidth2 - racketLength2 - 1)
+                    if(leftRacketHeight < fieldWidth2 - racketLength2 - 1)
                     {
-                      leftRacketHeight2++;
+                      leftRacketHeight++;
                     }
                     break;
                 }
+                rackets.setleftracketheight(leftRacketHeight);
+                rackets.setrightracketheight(rightRacketHeight);
+                
                   for (int i = 1; i < numb.GetfieldWidth(); i++)
                 {
                     Console.SetCursorPosition(0, i);
